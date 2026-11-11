@@ -1,0 +1,46 @@
+{
+  "name": "yukun",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A macOS floating control shell for local AI coding agents.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "doctor": "node scripts/doctor.mjs",
+    "desktop": "npm run setup:sessions && npm run tauri dev",
+    "app:build": "node scripts/clean-macos-bundle.mjs && tauri build --bundles app --no-sign",
+    "app:dmg": "npm run app:build && node scripts/create-macos-dmg.mjs",
+    "app:open": "open src-tauri/target/release/bundle/macos/yukun.app",
+    "app:install": "ditto src-tauri/target/release/bundle/macos/yukun.app /Applications/yukun.app",
+    "release:check": "node scripts/check-macos-release.mjs",
+    "release:notary:store": "zsh scripts/store-notary-credentials.sh",
+    "release:mac": "zsh scripts/release-macos.sh",
+    "archive:search": "node scripts/archive-search.mjs",
+    "setup:mac": "node scripts/setup-mac.mjs",
+    "setup:sessions": "node scripts/setup-mac.mjs --create-sessions",
+    "preview": "vite preview",
+    "tauri": "tauri"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^2.9.0",
+    "@tauri-apps/plugin-global-shortcut": "^2.3.1",
+    "clsx": "^2.1.1",
+    "i18next": "^25.6.3",
+    "lucide-react": "^0.555.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "react-i18next": "^16.3.5",
+    "tailwind-merge": "^3.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.17",
+    "@tauri-apps/cli": "^2.9.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
+    "tailwindcss": "^4.1.17",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.4"
+  }
+}
